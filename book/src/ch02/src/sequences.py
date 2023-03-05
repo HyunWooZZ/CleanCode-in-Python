@@ -10,7 +10,13 @@ class Items(Sequence):
         self._values = list(values)
 
     def __len__(self):
-        return len(self._values)
+       return len(self._values)
 
     def __getitem__(self, item):
         return self._values.__getitem__(item)
+    
+if __name__ == '__main__':
+    items = Items('apple', 'pear')
+    help(len)
+    print(items[1])    
+
