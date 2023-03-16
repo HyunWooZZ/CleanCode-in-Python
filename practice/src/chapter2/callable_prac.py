@@ -34,5 +34,3 @@ if __name__ == "__main__":
     if callable(cc):
         print('cc is callable!')
         print(cc._count_dict)
-
-    print(1 or 3)
