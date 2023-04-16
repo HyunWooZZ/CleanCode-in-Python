@@ -10,15 +10,29 @@ class BaseTokenizer:
 class UpperIterableMixin(BaseTokenizer):
     def __iter__(self):
         return map(str.upper, super().__iter__())
+    
+class tokenizer(UpperIterableMixin, BaseTokenizer):
+    '''mixin tokenizer'''
+    pass
+
 
 if __name__ == "__main__":
     # Create an instance of BaseTokenizer with a string
-    tokenizer = BaseTokenizer("hello-world-python")
-    tokenizer2 = UpperIterableMixin("hello-world-python")
+    tk = BaseTokenizer("hello-world-python")
+    tk2 = UpperIterableMixin("hello-world-python")
+
+    mixin_tk = tokenizer("hello-world-python")
+
+
 
     # Iterate over the tokenizer and print the values
-    for token in tokenizer:
+    for token in tk:
         print(token)
 
-    for token in tokenizer2:
+    for token in tk2:
         print(token)
+    
+    for token in mixin_tk:
+        print(token)
+
+    print([cls.__name__ for cls in tokenizer.mro()])
