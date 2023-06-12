@@ -1,8 +1,3 @@
-"""Clean Code in Python - Chapter 5: Decorators
-
-Parametrized decorators using functions
-"""
-
 from functools import wraps
 from typing import Sequence, Optional
 
@@ -21,6 +16,7 @@ class WithRetry:
             retries_limit: int = _DEFAULT_RETRIES_LIMIT,
             allowed_exceptions: Optional[Sequence[Exception]] = None
         ) -> None:
+
         self.retries_limit = retries_limit
         self.allowed_exceptions = allowed_exceptions or (ControlledException, )
 
@@ -32,11 +28,18 @@ class WithRetry:
             for _ in range(self.retries_limit):
                 try:
                     return operation(*args, **kwargs)
-                except self.allowed_exceptions as e:
-                    logger.warning(
-                        f"retry {operation.__qualname__}, caused by{e}"
-                    )
+                except self.allowed_exceptions as e:                    
+                    print(f"retry {operation.__qualname__}, caused by{e}")
                     last_raised = e
             raise last_raised
         return wrapped
-    
+
+if __name__ == "__main__":
+    def task():
+        print(5/0)
+
+    @WithRetry(retries_limit=5)
+    def run_with_custom(task):
+        return task
+
+    run_with_custom(task)

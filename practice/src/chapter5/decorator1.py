@@ -66,6 +66,9 @@ class TestLoginEventSerialized(unittest.TestCase):
 if __name__ == "__main__":
     unittest.main()
 
+    # my_little_event = LoginEvent("username", "password", "127.0.0.1", datetime(2016, 7, 20, 15, 45))
+    # print(dir(my_little_event))
+
 
 ### dataclass instance is created => init serializing
-### => wrapped the dataclass => ins_data = ins_serial(ins_data)
+### => wrapped the dataclass => ins_data = ins_serial(ins_data) => add serialize method..!!!

@@ -18,7 +18,7 @@ class WithRetry:
         allowed_exceptions: Optional[Sequence[Exception]] = None,
     ) -> None:
         self.retries_limit = retries_limit
-        self.allowed_exceptions = allowed_exceptions or (ControlledException,)
+        self.allowed_exceptions = allowed_exceptions or (ControlledException, ZeroDivisionError)
 
     def __call__(self, operation):
         @wraps(operation)
@@ -35,3 +35,17 @@ class WithRetry:
             raise last_raised
 
         return wrapped
+    
+@WithRetry(retries_limit=5, allowed_exceptions=(ZeroDivisionError,))
+def divide(a, b):
+    return a / b
+
+def main():
+    try:
+        result = divide(10, 0)
+        print("Result:", result)
+    except ZeroDivisionError:
+        print("Zero division error occurred.")
+
+if __name__ == "__main__":
+    main()
