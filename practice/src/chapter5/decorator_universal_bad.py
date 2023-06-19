@@ -42,3 +42,7 @@ class DataHandler:
         return driver.execute(self.__class__.__name__)
     
 
+if __name__ == "__main__":
+    print(run_query('test_is_OK'))
+    
+    DataHandler().run_query(driver="test_fails")
