@@ -20,7 +20,7 @@ class ProtectAttribute:
             )
 
 class User:
-    """Having a admin permission User can delete emial."""
+    """Having a admin permission User can delete email."""
     email = ProtectAttribute(requires_role='admin')
     
     def __init__(self, username: str, email: str, permission_list: list = None) -> None:
